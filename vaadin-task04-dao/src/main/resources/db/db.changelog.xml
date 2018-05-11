@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="melamory" id="init">
+        <!-- ================================= Hotels ================================= -->
+        <createTable tableName="HOTEL">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="OPTLOCK" type="BIGINT" />
+            <column name="NAME" type="VARCHAR(255)" />
+            <column name="ADDRESS" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="RATING" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="OPERATES_FROM" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="CATEGORY" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="URL" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="ivan" id="addNotNullConstraint-HOTEL-NAME">
+        <addNotNullConstraint columnDataType="VARCHAR(255)"
+                              columnName="NAME"
+                              tableName="HOTEL"/>
+    </changeSet>
+    <changeSet author="ivan" id="renameColumn-HOTEL-CATEGORY">
+        <renameColumn columnDataType="VARCHAR(255)"
+                      newColumnName="CATEGORY_ID"
+                      oldColumnName="CATEGORY"
+                      tableName="HOTEL"/>
+    </changeSet>
+    <changeSet author="ivan" id="modifyDataType-HOTEL-CATEGORY">
+        <modifyDataType columnName="CATEGORY_ID"
+                        newDataType="BIGINT"
+                        tableName="HOTEL"/>
+    </changeSet>
+    <changeSet author="ivan" id="addColumn-HOTEL-DESCRIPTION">
+        <addColumn  tableName="HOTEL">
+            <column name="DESCRIPTION" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="ivan" id="init-CATEGORY">
+        <!-- ================================= CATEGORIES ================================= -->
+        <createTable tableName="CATEGORY">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="OPTLOCK" type="BIGINT" />
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ivan" id="addUniqueConstraint-CATEGORY-NAME">
+        <addUniqueConstraint tableName="CATEGORY" columnNames="NAME"/>
+    </changeSet>
+    <changeSet author="ivan" id="insert-CATEGORY-ID=1-OPTLOCK=0-NAME=Hotel">
+        <insert tableName="CATEGORY ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Hotel"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-CATEGORY-ID=2-OPTLOCK=0-NAME=Hostel">
+        <insert tableName="CATEGORY ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Hostel"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-CATEGORY-ID=3-OPTLOCK=0-NAME=GuestHouse">
+        <insert tableName="CATEGORY ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="GuestHouse"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-CATEGORY-ID=4-OPTLOCK=0-NAME=Apartments">
+        <insert tableName="CATEGORY ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Apartments"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="ivan" id="insert-HOTEL-ID=1">
+        <!-- ================================= Hotels ================================= -->
+        <insert tableName="HOTEL ">
+            <column name="OPTLOCK" value="1"/>
+            <column name="NAME" value="3 Nagas Luang Prabang - MGallery by Sofitel"/>
+            <column name="ADDRESS" value="Vat Nong Village, Sakkaline Road, Democratic Republic Lao, 06000 Luang Prabang, Laos"/>
+            <column name="RATING" value="4"/>
+            <column name="OPERATES_FROM" value="17638"/>
+            <column name="CATEGORY_ID" value="1"/>
+            <column name="URL" value="https://www.booking.com/hotel/la/3-nagas-luang-prabang-by-accor.en-gb.html"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-HOTEL-ID=2">
+        <insert tableName="HOTEL ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Abby Boutique Guesthouse"/>
+            <column name="ADDRESS" value="Ban Sawang , 01000 Vang Vieng, Laos"/>
+            <column name="RATING" value="1"/>
+            <column name="OPERATES_FROM" value="17638"/>
+            <column name="CATEGORY_ID" value="1"/>
+            <column name="URL" value="https://www.booking.com/hotel/la/abby-boutique-guesthouse.en-gb.html"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-HOTEL-ID=3">
+        <insert tableName="HOTEL ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Bountheung Guesthouse"/>
+            <column name="ADDRESS" value="Ban Tha Heua, 01000 Vang Vieng, Laos"/>
+            <column name="RATING" value="1"/>
+            <column name="OPERATES_FROM" value="17638"/>
+            <column name="CATEGORY_ID" value="2"/>
+            <column name="URL" value="https://www.booking.com/hotel/la/bountheung-guesthouse.en-gb.html"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-HOTEL-ID=4">
+        <insert tableName="HOTEL ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Chalouvanh backend.Hotel"/>
+            <column name="ADDRESS" value="13 road, Ban Phonesavanh, Pakse District, 01000 Pakse, Laos"/>
+            <column name="RATING" value="2"/>
+            <column name="OPERATES_FROM" value="17638"/>
+            <column name="CATEGORY_ID" value="2"/>
+            <column name="URL" value="https://www.booking.com/hotel/la/chalouvanh.en-gb.html"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-HOTEL-ID=5">
+        <insert tableName="HOTEL ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Chaluenxay Villa"/>
+            <column name="ADDRESS" value="Sakkarin Road Ban Xienthong Luang Prabang Laos, 06000 Luang Prabang, Laos"/>
+            <column name="RATING" value="3"/>
+            <column name="OPERATES_FROM" value="17638"/>
+            <column name="CATEGORY_ID" value="3"/>
+            <column name="URL" value="https://www.booking.com/hotel/la/chaluenxay-villa.en-gb.html"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-HOTEL-ID=6">
+        <insert tableName="HOTEL ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Dream Home Hostel 1"/>
+            <column name="ADDRESS" value="049 Sihome Road, Ban Sihome, 01000 Vientiane, Laos"/>
+            <column name="RATING" value="1"/>
+            <column name="OPERATES_FROM" value="17638"/>
+            <column name="CATEGORY_ID" value="3"/>
+            <column name="URL" value="https://www.booking.com/hotel/la/getaway-backpackers-hostel.en-gb.html"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ivan" id="insert-HOTEL-ID=7">
+        <insert tableName="HOTEL ">
+            <column name="OPTLOCK" value="0"/>
+            <column name="NAME" value="Inpeng backend.Hotel and Resort"/>
+            <column name="ADDRESS" value="406 T4 Road, Donekoy Village, Sisattanak District, 01000 Vientiane, Laos"/>
+            <column name="RATING" value="2"/>
+            <column name="OPERATES_FROM" value="17638"/>
+            <column name="CATEGORY_ID" value="4"/>
+            <column name="URL" value="https://www.booking.com/hotel/la/inpeng-and-resort.en-gb.html"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
