@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--import resource from dao and service layers by loading=beans-services.xml -->
+    <import resource="classpath*:beans-services.xml"/>
+
+    <!-- автоматически проводит регистрацию всех бинов пост-процессоров
+     (AutowiredAnnotationBeanPostProcessor, CommonAnnotationBeanPostProcessor,
+     PersistenceAnnotationBeanPostProcessor, RequiredAnnotationBeanPostProcessor)
+     необходимых для работы контейнера Spring  с аннотациями.-->
+    <!-- switch of because is component-scan-->
+    <!--<context:annotation-config/>-->
+
+    <!--автоматическое определение и создание бинов для классов из
+        пакетов=.ui; .viws помеченных аннотацией @SpringUI; @SpringViewDisplay;
+        @SpringComponent; @SpringView  -->
+    <!-- All three annotation used in the sample: @Component, @Autowired and @PostConstruct are activated by the context:component-scan element. -->
+    <context:component-scan base-package="ui"/>
+    <context:component-scan base-package="views"/>
+    <context:component-scan base-package="utils.entitydescription.impl"/>
+
+    <!--<bean id="ntityUtil"  class="utils.entitydescription.impl.EntityUtil" scope="singleton">-->
+        <!--&lt;!&ndash;<constructor-arg ref="entityManagerFactory"/>&ndash;&gt;-->
+    <!--</bean>-->
+
+</beans>
